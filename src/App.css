@@ -13,3 +13,7 @@
 .text-secondary{
   color: #FAB331;
 }
+
+.active{
+  background-color: #FAB331;
+}

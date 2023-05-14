@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setLogin } from '../slice/LoginSlice'
 import { Link } from 'react-router-dom'
@@ -9,8 +10,17 @@ const Login = () => {
     const count = useSelector((state) => state.login.data)
     const dispatch = useDispatch()
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+      });
+    
+    const [error, setError] = useState({
+        errorEmail: false,
+        errorPass: false
+    })
 
     const handleLogin =  () => {
         count ? dispatch(setLogin(false)) : dispatch(setLogin(true)) 
@@ -18,6 +28,30 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if(formData.password === "") {
+            setError({...error, errorPass: true})
+            console.log(error)
+        }else{
+            setError({...error, errorPass: false})
+        }
+
+        if(formData.email === "") {
+            setError({...error, errorEmail: true})
+            console.log(error)
+        }else{
+            setError({...error, errorEmail: false})
+        }
+
+        if(formData.password !== "" && formData.email !== ""){
+            navigate('/dashboard')
+        }
+        
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value })
     }
   
     return (
@@ -35,10 +69,12 @@ const Login = () => {
                     <div className="form-elements">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group mb-4">
-                                <input type="text" className='bg-white h-12 w-96 rounded-md pl-5' placeholder='Email Address...' />
+                                <input type="email" name="email" value={formData.email} className={`bg-white h-12 w-96 rounded-md pl-5 ${error.errorEmail ?"border-2 border-red-500":""}`} placeholder='Email Address...' onChange={handleChange} />
+                                {error.errorEmail ? <p className='mt-3 text-red-500'>Field is required</p>: ""}
                             </div>
                             <div className="form-group mb-4">
-                                <input type="password" className='bg-white h-12 w-96 rounded-md pl-5' placeholder='Password...' />
+                                <input type="password" name="password" value={formData.password} className={`bg-white h-12 w-96 rounded-md pl-5 ${ error.errorPass ? "border-2 border-red-500":""}`} placeholder='Password...' onChange={handleChange} />
+                                {error.errorPass ? <p className='mt-3 text-red-500'>Field is required</p>: ""}
                             </div>
                             <div className="form-group mb-4">
                                 <button className='bg-secondary text-white h-12 w-96 rounded-md pl-5 font-semibold'>Login</button>
