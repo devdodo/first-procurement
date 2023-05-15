@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { FaCog, FaBell, FaUserCircle } from 'react-icons/fa'
 
-const Header = () => {
+const Header = ({currentPage}) => {
     function formatDate(dateString) {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const date = new Date(dateString);
@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className='width-main flex justify-between mb-12'>
         <div className="header-title">
-            <h1 className='text-3xl font-semibold' style={{color: '#5B5B5B'}}>Dashboard</h1>
+            <h1 className='text-3xl font-semibold' style={{color: '#5B5B5B'}}>{currentPage}</h1>
         </div>
         <div className="header-nav flex">
             <div className="header-date mr-4 mt-2">

@@ -2,38 +2,33 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaHome, FaPlusCircle, FaMapMarkerAlt, FaCog, FaBell, FaSignOutAlt } from 'react-icons/fa'
 
-const SideNav = () => {
+const SideNav = ({itemNum}) => {
 
     const navItems = [
         {
             name: "Dashboard",
             icon: <FaHome className='text-lg mt-1 mr-5'/>,
             link: "/dashboard",
-            active: true
         },
         {
             name: "New Request",
             icon: <FaPlusCircle className='text-lg mt-1 mr-5'/>,
             link: "/newrequest",
-            active: false
         },
         {
             name: "Track Request",
             icon: <FaMapMarkerAlt className='text-lg mt-1 mr-5'/>,
             link: "/trackrequest",
-            active: false
         },
         {
             name: "Settings",
             icon: <FaCog className='text-lg mt-1 mr-5'/>,
             link: "/settings",
-            active: false
         },
         {
             name: "Notifications",
             icon: <FaBell className='text-lg mt-1 mr-5'/>,
             link: "/notifications",
-            active: false
         },
     ]
   return (
@@ -44,10 +39,11 @@ const SideNav = () => {
         <div className="h-5/6 side-nav-height flex flex-col justify-between">
             <div className="nav-links">
                 {
-                    navItems.map(item => (
+                    navItems.map((item, index) => (
                         <Link to={item.link}>    
-                            <div className={`nav-items flex mb-4 p-2 border-rounded ${ item.active ? 'active' : ''}`}>
+                            <div className={`nav-items flex mb-4 p-2 border-rounded ${ index == itemNum ? 'active' : ''}`}>
                                 {item.icon}
+                                {console.log(itemNum)}
                                 <p className='text-lg font-semibold '>{item.name}</p>
                             </div>
                         </Link>

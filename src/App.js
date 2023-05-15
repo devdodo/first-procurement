@@ -1,6 +1,8 @@
 import './App.css';
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import NewRequest from './pages/NewRequest'
+import TrackRequest from './pages/TrackRequest'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,6 +16,14 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/newrequest",
+    element: <NewRequest />,
+  },
+  {
+    path: "/trackrequest",
+    element: <TrackRequest />,
   },
 ]);
 

@@ -2,12 +2,12 @@ import React from 'react'
 import { FaPlusCircle } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-const AddButton = () => {
+const AddButton = ({btnText}) => {
   return (
-    <div className='p-4 bg-secondary border-rounded text-white w-48 mb-8'>
-        <Link to={"/"} className='flex'>
+    <div>
+        <Link to={"/newrequest"} className='p-4 bg-secondary border-rounded text-white w-48 mb-8 flex'>
             <FaPlusCircle className='mt-1 mr-3' />
-            Add New Request
+            {btnText}
         </Link>
     </div>
   )
