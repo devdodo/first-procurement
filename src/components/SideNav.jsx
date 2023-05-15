@@ -37,16 +37,16 @@ const SideNav = () => {
         },
     ]
   return (
-    <div className='sidenav w-80 bg-primary h-screen px-5 py-9 text-white'>
+    <div className='sidenav w-80 bg-primary h-screen px-5 py-6 text-white'>
         <div className="nav-title pb-14">
             <h1 className='text-3xl italic font-semibold'>FirstProc</h1>
         </div>
-        <div className="h-5/6 flex flex-col justify-between">
+        <div className="h-5/6 side-nav-height flex flex-col justify-between">
             <div className="nav-links">
                 {
                     navItems.map(item => (
                         <Link to={item.link}>    
-                            <div className={`nav-items flex mb-4 p-2 rounded ${ item.active ? 'active' : ''}`}>
+                            <div className={`nav-items flex mb-4 p-2 border-rounded ${ item.active ? 'active' : ''}`}>
                                 {item.icon}
                                 <p className='text-lg font-semibold '>{item.name}</p>
                             </div>

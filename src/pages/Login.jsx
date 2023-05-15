@@ -29,18 +29,14 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(formData.password === "") {
-            setError({...error, errorPass: true})
-            console.log(error)
-        }else{
-            setError({...error, errorPass: false})
-        }
-
         if(formData.email === "") {
             setError({...error, errorEmail: true})
             console.log(error)
-        }else{
-            setError({...error, errorEmail: false})
+        }
+
+        if(formData.password === "") {
+            setError({...error, errorPass: true})
+            console.log(error)
         }
 
         if(formData.password !== "" && formData.email !== ""){

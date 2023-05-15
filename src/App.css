@@ -17,3 +17,23 @@
 .active{
   background-color: #FAB331;
 }
+
+.width-main{
+  width: 100%;
+}
+
+.w-card{
+  width: 23%;
+}
+
+.border-rounded{
+  border-radius: 10px;
+}
+
+th, td{
+  padding: 11px;
+}
+
+.side-nav-height{
+  height: 90%;
+}
