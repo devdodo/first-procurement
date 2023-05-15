@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   return (
     <div>
-        <div className="flex">
+        <div className="flex ">
             <div className="">
                 <SideNav itemNum={"0"}/>
             </div>

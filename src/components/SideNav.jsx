@@ -32,7 +32,7 @@ const SideNav = ({itemNum}) => {
         },
     ]
   return (
-    <div className='sidenav w-80 bg-primary h-screen px-5 py-6 text-white'>
+    <div className='sidenav w-80 bg-primary h-screen px-5 py-6 text-white' >
         <div className="nav-title pb-14">
             <h1 className='text-3xl italic font-semibold'>FirstProc</h1>
         </div>

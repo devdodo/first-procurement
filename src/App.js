@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import NewRequest from './pages/NewRequest'
 import TrackRequest from './pages/TrackRequest'
+import TrackRequestItem from './pages/TrackRequestItem'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/trackrequest",
     element: <TrackRequest />,
+  },
+  {
+    path: "/trackrequestitem",
+    element: <TrackRequestItem />,
   },
 ]);
 
