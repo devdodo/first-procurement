@@ -23,10 +23,10 @@ const Header = () => {
             </div>
             <div className="header-icons flex">
                 <Link to={"/"}>
-                    <FaCog className='text-lg mr-5 mt-2' style={{color: '#5B5B5B'}}/>
+                    <FaCog className='text-lg mr-5 mt-3' style={{color: '#5B5B5B'}}/>
                 </Link>
                 <Link to={"/"}>
-                    <FaBell className='text-lg mt-2 mr-5' style={{color: '#5B5B5B'}}/>
+                    <FaBell className='text-lg mt-3 mr-5' style={{color: '#5B5B5B'}}/>
                 </Link>
                 <div >
                     <FaUserCircle className=' mt-1 mr-5 ' style={{color: '#5B5B5B'}} size={38}/>
