@@ -15,11 +15,13 @@ const RequestItem = () => {
                     <div className="section-item flex">
                         <div className="item-label w-36">
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Item(s):</p>
-                        </div>
+                     </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
                             <p className='mb-2'>* Laptop x2</p>
                             <p className='mb-2'>* ATM cards x2,000</p>
                             <p className='mb-2'>* A4 Papers (Cartons) x5</p>
+                            <p className='mb-2'>* Office Chairs x2</p>
+                            <p className='mb-2'>* Office Chairs x2</p>
                             <p className='mb-2'>* Office Chairs x2</p>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ const SideNav = ({itemNum}) => {
         },
     ]
   return (
-    <div className='sidenav w-80 bg-primary h-screen text-white' >
+    <div className='sidenav fixed w-80 bg-primary h-screen text-white' >
         <div className="section-bg h-full px-5 py-3" style={{backgroundImage: `url(${FBNBg})`, backgroundSize: 'cover', backgroundPosition: 'Center', overflow: "hidden"}}>
             <div className="nav-title pb-7 flex justify-center">
                 <img src={FBNLogo} alt="" className='w-36'/>

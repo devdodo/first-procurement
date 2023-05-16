@@ -12,7 +12,7 @@ const Settings = () => {
             <div className="">
                 <SideNav itemNum={"3"} />
             </div>
-            <div className="main-div w-full py-6 px-8">
+            <div className="main-div ml-80 w-full py-6 px-8">
                 <Header currentPage={currentPage} />
                 <ChangePassword />
             </div>
