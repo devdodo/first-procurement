@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setLogin } from '../slice/LoginSlice'
 import { Link } from 'react-router-dom'
 import FBNLogo from '../assets/fbn-logo-asset.png'
 
 
 const Login = () => {
-    const count = useSelector((state) => state.login.data)
+    // const count = useSelector((state) => state.login.data)
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
@@ -22,9 +22,9 @@ const Login = () => {
         errorPass: false
     })
 
-    const handleLogin =  () => {
-        count ? dispatch(setLogin(false)) : dispatch(setLogin(true)) 
-    }
+    // const handleLogin =  (userData) => {
+         
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -39,9 +39,21 @@ const Login = () => {
             console.log(error)
         }
 
+        const userData = {
+            email: formData.email,
+            name: "James Friedman",
+            role: "ADMIN",
+            staffId: "SN12345678"
+        }
+
+        localStorage.setItem('logindata', JSON.stringify(userData));
+        
+        dispatch(setLogin(userData))
+
         if(formData.password !== "" && formData.email !== ""){
             navigate('/dashboard')
         }
+
         
     }
 
