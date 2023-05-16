@@ -4,14 +4,6 @@ import AddButton from './AddButton'
 
 const RequestItem = () => {
 
-    const AddItem = () => {
-        return(
-            <div className='p-4 bg-secondary border-rounded text-white mb-8 flex'>
-                <FaPlusCircle className='mt-1 mr-3' />
-                Add Item
-            </div>
-        )
-    }
   return (
     <div>
         <div className="section-title mb-3">
@@ -88,7 +80,7 @@ const RequestItem = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <AddButton btnText={"Send Request"}/>
+                    <AddButton btnText={"Acknowledge Receipt"}/>
                 </div>
             </form>
         </div>

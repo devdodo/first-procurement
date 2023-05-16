@@ -22,10 +22,10 @@ const Header = ({currentPage}) => {
                 <p>James Friedman | SN12345678</p>
             </div>
             <div className="header-icons flex">
-                <Link to={"/"}>
+                <Link to={"/settings"}>
                     <FaCog className='text-lg mr-5 mt-3' style={{color: '#5B5B5B'}}/>
                 </Link>
-                <Link to={"/"}>
+                <Link to={"/notifications"}>
                     <FaBell className='text-lg mt-3 mr-5' style={{color: '#5B5B5B'}}/>
                 </Link>
                 <div >

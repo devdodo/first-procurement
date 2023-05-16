@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard'
 import NewRequest from './pages/NewRequest'
 import TrackRequest from './pages/TrackRequest'
 import TrackRequestItem from './pages/TrackRequestItem'
+import Settings from './pages/Settings'
+import Notifications from './pages/Notifications'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
     path: "/trackrequestitem",
     element: <TrackRequestItem />,
   },
+  {
+    path: "/settings",
+    element: <Settings />,
+  },
+  {
+    path: "/notifications",
+    element: <Notifications />,
+  }
 ]);
 
 function App() {

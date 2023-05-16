@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaHome, FaPlusCircle, FaMapMarkerAlt, FaCog, FaBell, FaSignOutAlt } from 'react-icons/fa'
+import FBNLogo from '../assets/fbn-logo-white.png'
+import FBNBg from '../assets/fbn-bg.png'
 
 const SideNav = ({itemNum}) => {
 
@@ -32,30 +34,32 @@ const SideNav = ({itemNum}) => {
         },
     ]
   return (
-    <div className='sidenav w-80 bg-primary h-screen px-5 py-6 text-white' >
-        <div className="nav-title pb-14">
-            <h1 className='text-3xl italic font-semibold'>FirstProc</h1>
-        </div>
-        <div className="h-5/6 side-nav-height flex flex-col justify-between">
-            <div className="nav-links">
-                {
-                    navItems.map((item, index) => (
-                        <Link to={item.link}>    
-                            <div className={`nav-items flex mb-4 p-2 border-rounded ${ index == itemNum ? 'active' : ''}`}>
-                                {item.icon}
-                                {console.log(itemNum)}
-                                <p className='text-lg font-semibold '>{item.name}</p>
-                            </div>
-                        </Link>
-                    ))
-                }
+    <div className='sidenav w-80 bg-primary h-screen text-white' >
+        <div className="section-bg h-full px-5 py-3" style={{backgroundImage: `url(${FBNBg})`, backgroundSize: 'cover', backgroundPosition: 'Center', overflow: "hidden"}}>
+            <div className="nav-title pb-7 flex justify-center">
+                <img src={FBNLogo} alt="" className='w-36'/>
             </div>
-                <Link to="/logout">    
-                <div className="nav-items flex">
-                    <FaSignOutAlt className='text-lg mt-1 mr-5'/>
-                    <p className='text-lg font-semibold'>Logout</p>
+            <div className="h-5/6 side-nav-height flex flex-col justify-between">
+                <div className="nav-links">
+                    {
+                        navItems.map((item, index) => (
+                            <Link to={item.link}>    
+                                <div className={`nav-items flex mb-4 p-2 border-rounded ${ index == itemNum ? 'active' : ''}`}>
+                                    {item.icon}
+                                    {console.log(itemNum)}
+                                    <p className='text-lg font-semibold '>{item.name}</p>
+                                </div>
+                            </Link>
+                        ))
+                    }
                 </div>
+                <Link to="/logout">    
+                    <div className="nav-items flex">
+                        <FaSignOutAlt className='text-lg mt-1 mr-5'/>
+                        <p className='text-lg font-semibold'>Logout</p>
+                    </div>
                 </Link>
+            </div>
         </div>
     </div>
   )

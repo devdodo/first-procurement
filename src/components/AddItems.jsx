@@ -21,7 +21,7 @@ const AddItems = () => {
             <form action="">
                 <div className="form-group flex">
                     <div className="form-item flex flex-col mr-4">
-                        <label htmlFor="items" style={{color: '#5B5B5B'}}>Item(s)</label>
+                        <label htmlFor="items" className="font-semibold mb-2" style={{color: '#5B5B5B'}}>Item(s)</label>
                         <select className='input-width p-4 border border-rounded bg-white'>
                             <option>Laptop</option>
                             <option>Laptop</option>
@@ -30,22 +30,22 @@ const AddItems = () => {
                         </select>
                     </div>
                     <div className="form-item flex flex-col mr-4">
-                        <label htmlFor="items" style={{color: '#5B5B5B'}}>Quantity</label>
+                        <label htmlFor="items" className="font-semibold mb-2" style={{color: '#5B5B5B'}}>Quantity</label>
                         <input type="number" name="itemNumber" id=""  className='w-28 p-4 border border-rounded bg-white'/>
                     </div>
                     <div className="form-item">
-                        <br />
+                        <br className='mb-2'/>
                         <AddItem />
                     </div>
                 </div>
                 <div className="form-group mb-3">
                     <div className="form-item flex flex-col mr-4">
-                        <label htmlFor="items" style={{color: '#5B5B5B'}}>Comment</label>
+                        <label htmlFor="items" className="font-semibold mb-2" style={{color: '#5B5B5B'}}>Comment</label>
                         <textarea name="" id="" cols="40" rows="5" className='w-textarea p-4 border border-rounded bg-white'></textarea>
                     </div>
                 </div>
                 <div className="form-group">
-                    <AddButton btnText={"Send Request"}/>
+                    <AddButton btnText={"Send Request"}  btnIcon={true}/>
                 </div>
             </form>
         </div>

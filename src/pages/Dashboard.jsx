@@ -17,7 +17,7 @@ const Dashboard = () => {
             <div className="main-div w-full py-6 px-8">
                 <Header currentPage={currentPage} />
                 <Cards />
-                <AddButton btnText={"Add New Request"}/>
+                <AddButton btnText={"Add New Request"}  btnIcon={true}/>
                 <RecentRequest />
             </div>
         </div>
