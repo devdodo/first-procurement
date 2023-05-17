@@ -14,7 +14,7 @@ const TrackRequest = () => {
     <div>
         <div className="flex">
             <div className="">
-                <SideNav itemNum={role==="Admin" ? "2" : "1"} />
+                <SideNav itemNum={role === "ADMIN" ? "2" : "1"} />
             </div>
             <div className="main-div ml-80 w-full py-6 px-8">
                 <Header currentPage={currentPage} />

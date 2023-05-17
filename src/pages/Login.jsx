@@ -17,10 +17,8 @@ const Login = () => {
         password: ''
       });
     
-    const [error, setError] = useState({
-        errorEmail: false,
-        errorPass: false
-    })
+    const [emailError, setEmailError] = useState(false)
+    const [passError, setPassError] = useState(false)
 
     // const handleLogin =  (userData) => {
          
@@ -30,20 +28,42 @@ const Login = () => {
         e.preventDefault()
 
         if(formData.email === "") {
-            setError({...error, errorEmail: true})
-            console.log(error)
+            setEmailError(true)
+        }else{
+            setEmailError(false)
         }
 
         if(formData.password === "") {
-            setError({...error, errorPass: true})
-            console.log(error)
+            setPassError(true)
+        }else{
+            setPassError(false)
         }
 
-        const userData = {
-            email: formData.email,
-            name: "James Friedman",
-            role: "ADMIN",
-            staffId: "SN12345678"
+        const possibleUsers = ["admin@gmail.com", "hbs@gmail.com", "proc@gmail.com"]
+
+        let userData;
+
+        if(formData.email === possibleUsers[0]){
+            userData = {
+                email: formData.email,
+                name: "James Friedman",
+                role: "ADMIN",
+                staffId: "SN12345678"
+            }
+        }else if(formData.email === possibleUsers[1]){
+            userData = {
+                email: formData.email,
+                name: "James Friedman",
+                role: "HBS",
+                staffId: "SN12345678"
+            }
+        }else if(formData.email === possibleUsers[2]){
+            userData = {
+                email: formData.email,
+                name: "James Friedman",
+                role: "PROC",
+                staffId: "SN12345678"
+            }
         }
 
         localStorage.setItem('logindata', JSON.stringify(userData));
@@ -77,12 +97,12 @@ const Login = () => {
                     <div className="form-elements">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group mb-4">
-                                <input type="email" name="email" value={formData.email} className={`bg-white h-12 w-96 rounded-md pl-5 ${error.errorEmail ?"border-2 border-red-500":""}`} placeholder='Email Address...' onChange={handleChange} />
-                                {error.errorEmail ? <p className='mt-3 text-red-500'>Field is required</p>: ""}
+                                <input type="email" name="email" value={formData.email} className={`bg-white h-12 w-96 rounded-md pl-5 ${emailError && "border-2 border-red-500"}`} placeholder='Email Address...' onChange={handleChange} />
+                                {emailError && <p className='mt-3 text-red-500'>Field is required</p>}
                             </div>
                             <div className="form-group mb-4">
-                                <input type="password" name="password" value={formData.password} className={`bg-white h-12 w-96 rounded-md pl-5 ${ error.errorPass ? "border-2 border-red-500":""}`} placeholder='Password...' onChange={handleChange} />
-                                {error.errorPass ? <p className='mt-3 text-red-500'>Field is required</p>: ""}
+                                <input type="password" name="password" value={formData.password} className={`bg-white h-12 w-96 rounded-md pl-5 ${ passError && "border-2 border-red-500"}`} placeholder='Password...' onChange={handleChange} />
+                                {passError && <p className='mt-3 text-red-500'>Field is required</p>}
                             </div>
                             <div className="form-group mb-4">
                                 <button className='bg-secondary text-white h-12 w-96 rounded-md pl-5 font-semibold'>Login</button>

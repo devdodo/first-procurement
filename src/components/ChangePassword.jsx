@@ -31,7 +31,7 @@ const ChangePassword = () => {
                 
                 
                 <div className="form-group">
-                    <AddButton btnText={"Change Password"} btnIcon={false} />
+                    <AddButton btnText={"Change Password"} btnIcon={false} btnColor={"bg-secondary"}/>
                 </div>
             </form>
         </div>

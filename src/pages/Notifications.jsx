@@ -15,7 +15,7 @@ const Notifications = () => {
     <div>
         <div className="flex">
             <div className="">
-                <SideNav itemNum={role==="Admin" ? "4" : "3"} />
+                <SideNav itemNum={role === "ADMIN" ? "4" : "3"} />
             </div>
             <div className="main-div ml-80 w-full py-6 px-8">
                 <Header currentPage={currentPage} />

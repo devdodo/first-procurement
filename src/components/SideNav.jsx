@@ -12,10 +12,10 @@ const SideNav = ({itemNum}) => {
 
     const storedElements = localStorage.getItem('logindata')
 
-    const dataObject = JSON.parse(storedElements)
+    const role = JSON.parse(storedElements).role
 
     useEffect(() => {
-        if(dataObject.role==="ADMIN"){
+        if(role==="ADMIN"){
             setNavItems([{
                 name: "Dashboard",
                 icon: <FaHome className='text-lg mt-1 mr-5'/>,
@@ -41,7 +41,7 @@ const SideNav = ({itemNum}) => {
                 icon: <FaBell className='text-lg mt-1 mr-5'/>,
                 link: "/notifications",
             }])
-        }else if(dataObject.role === "HBS"){
+        }else if(role === "HBS" || role === "PROC" ){
             setNavItems([{
                 name: "Dashboard",
                 icon: <FaHome className='text-lg mt-1 mr-5'/>,
@@ -78,14 +78,13 @@ const SideNav = ({itemNum}) => {
                             <Link key={index} to={item.link}>    
                                 <div className={`nav-items flex mb-4 p-2 border-rounded ${ index == itemNum ? 'active' : ''}`} >
                                     {item.icon}
-                                    {console.log(itemNum)}
                                     <p className='text-lg font-semibold '>{item.name}</p>
                                 </div>
                             </Link>
                         ))
                     }
                 </div>
-                <Link to="/logout">    
+                <Link to="/">    
                     <div className="nav-items flex">
                         <FaSignOutAlt className='text-lg mt-1 mr-5'/>
                         <p className='text-lg font-semibold'>Logout</p>

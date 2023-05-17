@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Cards from '../components/Cards'
 import AddButton from '../components/AddButton'
 import RecentRequest from '../components/RecentRequest'
+import RecentRequestProc from '../components/RecentRequestProc'
 import { useSelector } from 'react-redux'
 
 
@@ -14,7 +15,7 @@ const Dashboard = () => {
 
   const storedElements = localStorage.getItem('logindata')
 
-  const dataObject = JSON.parse(storedElements)
+  const role = JSON.parse(storedElements).role
 
   return (
     <div>
@@ -25,8 +26,9 @@ const Dashboard = () => {
             <div className="main-div ml-80 w-full py-6 px-8">
                 <Header currentPage={currentPage} />
                 <Cards />
-                {dataObject.role === "ADMIN"? <AddButton btnText={"Add New Request"}  btnIcon={true}/>: ""}
-                <RecentRequest />
+                {role === "ADMIN"? <AddButton btnText={"Add New Request"}  btnIcon={true} btnColor={"bg-secondary"}/>: ""}
+                {role === "PROC"? <RecentRequestProc /> : <RecentRequest />}
+                
             </div>
         </div>
     </div>
