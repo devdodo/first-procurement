@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { setLogin } from '../slice/LoginSlice'
 import { Link } from 'react-router-dom'
 import FBNLogo from '../assets/fbn-logo-asset.png'
+import FBNBg from '../assets/fbn-bg-big.png'
 
 
 const Login = () => {
@@ -19,6 +20,7 @@ const Login = () => {
     
     const [emailError, setEmailError] = useState(false)
     const [passError, setPassError] = useState(false)
+    const [invalidLogin, setInvalidLogin] = useState(false)
 
     // const handleLogin =  (userData) => {
          
@@ -39,42 +41,64 @@ const Login = () => {
             setPassError(false)
         }
 
-        const possibleUsers = ["admin@gmail.com", "hbs@gmail.com", "proc@gmail.com"]
-
-        let userData;
-
-        if(formData.email === possibleUsers[0]){
-            userData = {
-                email: formData.email,
-                name: "James Friedman",
+        const userLogin = [
+            {
+                email: "admin@gmail.com",
+                password: "test123",
+                name: "Atolagbe Ayobami",
                 role: "ADMIN",
                 staffId: "SN12345678"
-            }
-        }else if(formData.email === possibleUsers[1]){
-            userData = {
-                email: formData.email,
-                name: "James Friedman",
+            },
+            {
+                email: "hbs@gmail.com",
+                password: "test123",
+                name: "Emmanuel Afolayan",
                 role: "HBS",
                 staffId: "SN12345678"
-            }
-        }else if(formData.email === possibleUsers[2]){
-            userData = {
-                email: formData.email,
-                name: "James Friedman",
+            },
+            {
+                email: "proc@gmail.com",
+                password: "test123",
+                name: "Temitope Fasoranti",
                 role: "PROC",
                 staffId: "SN12345678"
-            }
-        }
-
-        localStorage.setItem('logindata', JSON.stringify(userData));
-        
-        dispatch(setLogin(userData))
+            },
+        ]
 
         if(formData.password !== "" && formData.email !== ""){
-            navigate('/dashboard')
+            if(userLogin.some(user => user.email === formData.email && user.password === formData.password)){
+                
+                userLogin.some(user => {
+                    if(user.email === formData.email && user.password === formData.password){
+                        
+                        let userData;
+    
+                        userData = {
+                            email: user.email,
+                            name: user.name,
+                            role: user.role,
+                            staffId: user.staffId
+                        }
+
+                
+                        localStorage.setItem('logindata', JSON.stringify(userData));
+                        
+                        dispatch(setLogin(userData))
+
+                        console.log("user exist")
+
+                        navigate('/dashboard')
+                    }
+
+                })
+    
+            }else{
+                setInvalidLogin(true);
+            }
+
         }
 
-        
+
     }
 
     const handleChange = (e) => {
@@ -91,9 +115,14 @@ const Login = () => {
                     <img src={FBNLogo} alt="First Bank Logo" className='w-96' />
                 </div>
             </div>
-            <div className="login-container w-1/2 bg-primary h-screen flex justify-center items-center">
-                <div className="login-elements">
-                    <h1 className='text-white text-2xl text-center mb-6'>User Login</h1>
+            <div className="login-container w-1/2 bg-primary h-screen ">
+                <div className="login-elements h-screen flex flex-col justify-center items-center"  style={{backgroundImage: `url(${FBNBg})`, backgroundSize: 'cover', backgroundPosition: 'Center', overflow: "hidden"}}>
+                    <h1 className='text-white text-2xl text-center mb-6'>Welcome to FirstProc</h1>
+                    {invalidLogin? 
+                        <div className="border border-red-500 bg-red-100 text-red-500 w-96 p-3 rounded-lg mb-4 text-center">
+                            <p>Seems like the details that you entered are not correct, Kindly contact Admin.</p>
+                        </div>
+                    : ""}
                     <div className="form-elements">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group mb-4">
@@ -113,6 +142,7 @@ const Login = () => {
                         </form>
                     </div>
                 </div>
+                
             </div>
           </div>
         </div>

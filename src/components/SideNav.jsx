@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 
 
 const SideNav = ({itemNum}) => {
-    const data = useSelector((state) => state.login.data)
+    // const data = useSelector((state) => state.login.data)
     const [navItems, setNavItems] = useState([])
 
     const storedElements = localStorage.getItem('logindata')
@@ -63,7 +63,7 @@ const SideNav = ({itemNum}) => {
                 link: "/notifications",
             }])
         }
-    }, [])
+    }, [role])
 
   return (
     <div className='sidenav fixed w-80 bg-primary h-screen text-white' >

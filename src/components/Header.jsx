@@ -9,6 +9,10 @@ const Header = ({currentPage}) => {
         return date.toLocaleDateString('en-US', options);
     }
 
+    const storedElements = localStorage.getItem('logindata')
+
+    const userData = JSON.parse(storedElements)
+
   return (
     <div className='width-main flex justify-between mb-12'>
         <div className="header-title">
@@ -19,7 +23,7 @@ const Header = ({currentPage}) => {
                 <p>{formatDate(Date.now())}</p>
             </div>
             <div className="header-user mr-4 border-rounded" style={{backgroundColor: "#D9D9D9", padding: "8px 16px" }}>
-                <p>James Friedman | SN12345678</p>
+                <p>{userData.name} | {userData.staffId}</p>
             </div>
             <div className="header-icons flex">
                 <Link to={"/settings"}>

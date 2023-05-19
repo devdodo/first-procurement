@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 
 const Dashboard = () => {
   const currentPage = "Dashboard"
-  const data = useSelector((state) => state.login.data)
+  // const data = useSelector((state) => state.login.data)
 
   const storedElements = localStorage.getItem('logindata')
 

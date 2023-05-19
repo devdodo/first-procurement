@@ -19,8 +19,8 @@ const Notification = () => {
         <div className="section-title mb-3">
             <p className='font-semibold' style={{color: '#5B5B5B'}}>Notifications</p>
         </div>
-        {items.map(item => (
-            <div className={`border border-1 border-rounded p-4 flex items-center mb-3 ${item.bgColor}`}>
+        {items.map((item, index) => (
+            <div key={index} className={`border border-1 border-rounded p-4 flex items-center mb-3 ${item.bgColor}`}>
                 <div className="icon-div pr-4">
                     <FaBell className={`text-2xl ${item.textColor}`} />
                 </div>
