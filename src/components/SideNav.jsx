@@ -76,9 +76,9 @@ const SideNav = ({itemNum}) => {
                     {
                         navItems.map((item, index) => (
                             <Link key={index} to={item.link}>    
-                                <div className={`nav-items flex mb-4 p-2 border-rounded ${ index == itemNum ? 'active' : ''}`} >
+                                <div className={`nav-items flex mb-4 border-rounded p-2 ${ index == itemNum ? 'active' : 'hover:text-yellow-200'}`} >
                                     {item.icon}
-                                    <p className='text-lg font-semibold '>{item.name}</p>
+                                    <p className='ml-2 text-lg font-semibold '>{item.name}</p>
                                 </div>
                             </Link>
                         ))

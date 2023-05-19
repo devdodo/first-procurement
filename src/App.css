@@ -2,6 +2,14 @@
   background-color: #00305D;
 }
 
+.bg-primary-light{
+  background-color: #0a3b68;
+}
+
+.text-primary{
+  color: #00305D;
+}
+
 .bg-secondary{
   background-color: #FAB331;
 }
@@ -16,6 +24,7 @@
 
 .active{
   background-color: #FAB331;
+  color: #fff;
 }
 
 .width-main{

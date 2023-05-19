@@ -10,12 +10,12 @@ const AddButton = ({btnText, btnIcon, btnColor}) => {
 
   return (
     <div>
-        <Link to={"/newrequest"} >
-            <div className={`p-4 ${role === "ADMIN" ?"bg-secondary": btnColor} border-rounded text-white w-48 mb-8 flex justify-center`}> 
+          <div> 
+            <Link to={"/newrequest"}  className={`p-4 ${role === "ADMIN" ?"bg-secondary": btnColor} border-rounded text-white w-48 mb-8 flex justify-center`}>
                 {btnIcon?<FaPlusCircle className='mt-1 mr-3' />:""}
                 {btnText}
-            </div>
-        </Link>
+            </Link>
+          </div>
     </div>
   )
 }
