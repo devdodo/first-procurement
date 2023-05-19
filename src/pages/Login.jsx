@@ -47,21 +47,21 @@ const Login = () => {
                 password: "test123",
                 name: "Atolagbe Ayobami",
                 role: "ADMIN",
-                staffId: "SN12345678"
+                staffId: "SN123456"
             },
             {
                 email: "hbs@gmail.com",
                 password: "test123",
                 name: "Emmanuel Afolayan",
                 role: "HBS",
-                staffId: "SN12345678"
+                staffId: "SN456456"
             },
             {
                 email: "proc@gmail.com",
                 password: "test123",
                 name: "Temitope Fasoranti",
                 role: "PROC",
-                staffId: "SN12345678"
+                staffId: "SN32156"
             },
         ]
 
