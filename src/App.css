@@ -2,21 +2,16 @@
 	background-color: #00305d;
 }
 
-<<<<<<< HEAD
+.bg-primary-light {
+	background-color: #0a3b68;
+}
+
+.text-primary {
+	color: #00305d;
+}
+
 .bg-secondary {
 	background-color: #fab331;
-=======
-.bg-primary-light{
-  background-color: #0a3b68;
-}
-
-.text-primary{
-  color: #00305D;
-}
-
-.bg-secondary{
-  background-color: #FAB331;
->>>>>>> main
 }
 
 .bg-secondary:hover {
@@ -27,14 +22,9 @@
 	color: #fab331;
 }
 
-<<<<<<< HEAD
 .active {
 	background-color: #fab331;
-=======
-.active{
-  background-color: #FAB331;
-  color: #fff;
->>>>>>> main
+	color: #fff;
 }
 
 .width-main {
@@ -62,34 +52,10 @@ td {
 	width: 550px;
 }
 
-<<<<<<< HEAD
+.input-width-half {
+	width: 265px;
+}
+
 .w-textarea {
 	max-width: 820px;
 }
-
-.w-items {
-	max-width: 820px;
-}
-
-.error {
-	color: red;
-}
-
-.container {
-	width: 90%;
-	margin: auto;
-	margin-top: 30px;
-}
-
-.btn {
-	width: 150px;
-}
-=======
-.input-width-half{
-  width: 265px;
-}
-
-.w-textarea{
-  max-width: 820px;
-}
->>>>>>> main
