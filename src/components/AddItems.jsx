@@ -64,11 +64,11 @@ const AddItems = () => {
 	};
 
 	//Delete items
-	const onClickDelete = (event, i) => {
-		event.preventDefault();
-		console.log('onClickDelete');
-		//const newItems = items.filter(item => item.id !==)
-		console.log(items, i);
+	const onClickDelete = (id) => {
+		const newItems = items.filter(
+			(item) => item.id !== id,
+		);
+		setitems([...newItems]);
 	};
 
 	//options populated from back end
@@ -213,8 +213,10 @@ const AddItems = () => {
 								</div>
 								<div>x {item.quantity}</div>
 								<div
-									class='cursor-pointer'
-									onClick={onClickDelete}
+									className='cursor-pointer'
+									onClick={(e) => {
+										onClickDelete(item.id);
+									}}
 								>
 									<FaTrashAlt />
 								</div>
@@ -248,23 +250,23 @@ const AddItems = () => {
 				</form>
 
 				<div
-					class={`fixed top-0 left-0 right-0 z-50 p-4 bg-black bg-opacity-20 overflow-x-hidden overflow-y-auto md:inset-0  max-h-screen ${
+					className={`fixed top-0 left-0 right-0 z-50 p-4 bg-black bg-opacity-20 overflow-x-hidden overflow-y-auto md:inset-0  max-h-screen ${
 						modalDisplay ? 'flex' : 'hidden'
 					} justify-center items-center`}
 				>
-					<div class='relative w-full max-w-md max-h-full'>
-						<div class='relative bg-white rounded-lg shadow bg-primary'>
-							<div class='p-6 text-center'>
+					<div className='relative w-full max-w-md max-h-full'>
+						<div className='relative bg-white rounded-lg shadow bg-primary'>
+							<div className='p-6 text-center'>
 								<div className='flex justify-center mb-4'>
 									<FaCheckCircle className='text-white text-center text-4xl' />
 								</div>
-								<h3 class='mb-5 text-lg font-normal text-white'>
+								<h3 className='mb-5 text-lg font-normal text-white'>
 									Your request has been sent
 									successfully.
 								</h3>
 								<Link
 									to='/dashboard'
-									class='text-white bg-secondary focus:outline-none font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2'
+									className='text-white bg-secondary focus:outline-none font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2'
 								>
 									Go Home
 								</Link>
