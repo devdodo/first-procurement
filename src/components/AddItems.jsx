@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	FaPlusCircle,
 	FaCheckCircle,
+	FaTrashAlt,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -30,7 +31,6 @@ const AddItems = () => {
 
 	const onClickAddItem = (e) => {
 		e.preventDefault();
-		console.log('click');
 
 		//Convert quantity from string to integer
 		const quantityInt = parseFloat(quantity);
@@ -48,17 +48,27 @@ const AddItems = () => {
 			return;
 		} else setQuantityError('');
 
+		//Getting random id for each item
+		const id = Math.random();
+
 		//Item and quantity
 		const item_quant = {
+			id,
 			item,
 			quantity,
 		};
 		setitems([...items, item_quant]);
-		console.log(items);
-
 		//Clear errors
 		setitemError('');
 		setQuantityError('');
+	};
+
+	//Delete items
+	const onClickDelete = (event, i) => {
+		event.preventDefault();
+		console.log('onClickDelete');
+		//const newItems = items.filter(item => item.id !==)
+		console.log(items, i);
 	};
 
 	//options populated from back end
@@ -192,16 +202,22 @@ const AddItems = () => {
 						</div>
 					</div>
 
-					<div className='form-group flex flex-col mr-4 w-items'>
+					<div className='form-group flex flex-col mr-4'>
 						{items.map((item, index) => (
 							<div
 								key={index}
-								className='form-item flex text-green-700 bg-green-100 items-center space-x-9 pl-5 p-4 border border-green border-rounded mb-2 w-textarea'
+								className='form-item flex text-green-700 bg-green-100 items-center px-5 justify-between p-4 border border-green border-rounded mb-2 w-textarea'
 							>
 								<div className='w-56'>
 									{item.item}
 								</div>
 								<div>x {item.quantity}</div>
+								<div
+									class='cursor-pointer'
+									onClick={onClickDelete}
+								>
+									<FaTrashAlt />
+								</div>
 							</div>
 						))}
 					</div>
