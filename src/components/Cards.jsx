@@ -1,10 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaPaperPlane, FaCheck, FaHourglassHalf, FaTimes } from 'react-icons/fa'
 
 const Cards = () => {
+
+    const [requestNum, setRequestNum] = useState(0)
+    const [pending, setPending] = useState([])
+    const [approved, setApproved] = useState([])
+    const [rejected, setRejected] = useState([])
+
     const storedElements = localStorage.getItem('logindata')
 
     const role = JSON.parse(storedElements).role
+
+    const userData = JSON.parse(localStorage.getItem('logindata'))
+
+    useEffect(() => {
+        
+        fetch(`http://localhost:8000/request?initiatedBy=${userData.staffId}`)
+        .then(data => data.json())
+        .then(res => {
+
+          setRequestNum(res)
+          setPending(res.filter(result => result.status === "pending"))
+          setApproved(res.filter(result => result.status === "approved"))
+          setRejected(res.filter(result => result.status === "rejected"))
+          console.log(res)
+
+        })
+        .catch(error => console.error(error))
+
+    }, [])
 
   return (
     <div>
@@ -17,10 +42,10 @@ const Cards = () => {
                 </div>
                 <div className="form-el">
                     <div className="card-number text-white">
-                        <p className='text-4xl font-bold'>4</p>
+                        <p className='text-4xl font-bold'>{requestNum.length}</p>
                     </div>
                     <div className="card-text text-white">
-                        <p className='text-lg'><span className='font-semibold'>Sent</span> Request</p>
+                        <p className='text-lg'><span className='font-semibold'>All</span> Requests</p>
                     </div>
                 </div>
             </div>
@@ -32,7 +57,7 @@ const Cards = () => {
                 </div>
                 <div className="form-el">
                     <div className="card-number text-white">
-                        <p className='text-4xl font-bold'>4</p>
+                        <p className='text-4xl font-bold'>{approved.length}</p>
                     </div>
                     <div className="card-text text-white">
                         <p className='text-lg'><span className='font-semibold'>Approved</span> Request</p>
@@ -47,7 +72,7 @@ const Cards = () => {
                 </div>
                 <div className="form-el">
                     <div className="card-number text-white">
-                        <p className='text-4xl font-bold'>4</p>
+                        <p className='text-4xl font-bold'>{pending.length}</p>
                     </div>
                     <div className="card-text text-white">
                         <p className='text-lg'><span className='font-semibold'>Pending</span> Request</p>
@@ -62,7 +87,7 @@ const Cards = () => {
                 </div>
                 <div className="form-el">
                     <div className="card-number text-white">
-                        <p className='text-4xl font-bold'>4</p>
+                        <p className='text-4xl font-bold'>{rejected.length}</p>
                     </div>
                     <div className="card-text text-white">
                         <p className='text-lg'><span className='font-semibold'>Rejected</span> Request</p>

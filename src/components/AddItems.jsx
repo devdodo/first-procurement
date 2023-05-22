@@ -5,13 +5,21 @@ import { useState } from 'react';
 
 const AddItems = () => {
 	//Item list
-	const [item, setItem] = useState('');
-	const [quantity, setQuantity] = useState('');
+	const [item, setItem] = useState('')
+	const [quantity, setQuantity] = useState('')
+	const [comment, setComment] = useState('')
+	const [approverName, setApproverName] = useState('')
+
+	let approver = ""
 
 	//Error State
 	const [itemError, setitemError] = useState('');
 	const [quantityError, setQuantityError] = useState('');
+
+	//Modal Display
 	const [modalDisplay, setModalDisplay] = useState(false);
+
+    const [invalidItems, setInvalidItems] = useState(false)
 
 	const onChangeItem = (e) => {
 		setItem(e.target.value);
@@ -19,13 +27,15 @@ const AddItems = () => {
 	const onChangeQuantity = (e) => {
 		setQuantity(e.target.value);
 	};
+	const onChangeComment  = (e) => {
+		setComment(e.target.value)
+	}
 
 	//state of items_quant
 	const [items, setitems] = useState([]);
 
 	const onClickAddItem = (e) => {
 		e.preventDefault();
-		console.log('click');
 
 		//Convert quantity from string to integer
 		const quantityInt = parseFloat(quantity);
@@ -48,14 +58,17 @@ const AddItems = () => {
 			item,
 			quantity,
 		};
+		
 		setitems([...items, item_quant]);
-		console.log(items);
 
+		invalidItems ? setInvalidItems(false) : 
+
+		
 		//Clear errors
 		setitemError('');
 		setQuantityError('');
 	};
-
+	
 	//options populated from back end
 	const options = [
 		{ value: '', label: 'Select an Item...' },
@@ -96,7 +109,55 @@ const AddItems = () => {
     const submitForm = (e) => {
         e.preventDefault()
 
-        modalDisplay ? setModalDisplay(false) : setModalDisplay(true)
+		const userData = JSON.parse(localStorage.getItem('logindata'))
+
+		fetch(`http://localhost:8000/users?solId=${userData.solId}&role=HBS`)
+		.then(data => data.json())
+		.then(res => {
+			approver = res[0].name
+		})
+		.catch(error => console.error(error))
+
+		const requestData = {
+			items,
+			status: "pending",
+			approver: approver,
+			date: Date.now(),
+			solId: userData.solId,
+			branchLocation: userData.branchLocation,
+			branchState: userData.branchState,
+			hbsApproval: false,
+			cosmApproval: false,
+			initiatedBy: userData.staffId,
+			initiatorName: userData.name,
+			comment: comment
+		}
+
+		console.log(requestData)
+
+		if(items.length > 0){
+
+			fetch('http://localhost:8000/request',{
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify(requestData)
+			})
+			.then(data => data.json())
+			.then(res => {
+				if(res.length !== 0){
+					setInvalidItems(false)
+
+					modalDisplay ? setModalDisplay(false) : setModalDisplay(true)
+				}
+			})
+			.catch(error => console.error(error))
+
+		}else{
+			setInvalidItems(true)
+		}
+
     }
 
 	return (
@@ -110,6 +171,11 @@ const AddItems = () => {
 				</p>
 			</div>
 			<div className='section-table border border-1 border-rounded p-4'>
+					{invalidItems? 
+                        <div className="border border-red-500 bg-red-100 text-red-500 w-textarea p-3 rounded-lg mb-4 text-center">
+                            <p>Kindly fill the form below.</p>
+                        </div>
+                    : ""}
 				<form action='' onSubmit={submitForm}>
 					<div className='form-group flex'>
 						<div className='form-item flex flex-col mr-4'>
@@ -193,6 +259,8 @@ const AddItems = () => {
 								cols='40'
 								rows='5'
 								className='w-textarea p-4 border border-rounded bg-white'
+								value={comment}
+								onChange={onChangeComment}
 							></textarea>
 						</div>
 					</div>
@@ -204,15 +272,15 @@ const AddItems = () => {
 					</div>
 				</form>
 
-            <div class={`fixed top-0 left-0 right-0 z-50 p-4 bg-black bg-opacity-20 overflow-x-hidden overflow-y-auto md:inset-0  max-h-screen ${modalDisplay ? "flex" : "hidden" } justify-center items-center`}>
-                <div class="relative w-full max-w-md max-h-full">
-                    <div class="relative bg-white rounded-lg shadow bg-primary">
-                        <div class="p-6 text-center">
+            <div className={`fixed top-0 left-0 right-0 z-50 p-4 bg-black bg-opacity-20 overflow-x-hidden overflow-y-auto md:inset-0  max-h-screen ${modalDisplay ? "flex" : "hidden" } justify-center items-center`}>
+                <div className="relative w-full max-w-md max-h-full">
+                    <div className="relative bg-white rounded-lg shadow bg-primary">
+                        <div className="p-6 text-center">
                             <div className="flex justify-center mb-4">
                                 <FaCheckCircle className="text-white text-center text-4xl" />
                             </div>
-                            <h3 class="mb-5 text-lg font-normal text-white">Your request has been sent successfully.</h3>
-                            <Link to="/dashboard" class="text-white bg-secondary focus:outline-none font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            <h3 className="mb-5 text-lg font-normal text-white">Your request has been sent successfully.</h3>
+                            <Link to="/dashboard" className="text-white bg-secondary focus:outline-none font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                 Go Home
                             </Link>
                         </div>

@@ -41,60 +41,59 @@ const Login = () => {
             setPassError(false)
         }
 
-        const userLogin = [
-            {
-                email: "admin@gmail.com",
-                password: "test123",
-                name: "Atolagbe Ayobami",
-                role: "ADMIN",
-                staffId: "SN123456"
-            },
-            {
-                email: "hbs@gmail.com",
-                password: "test123",
-                name: "Emmanuel Afolayan",
-                role: "HBS",
-                staffId: "SN456456"
-            },
-            {
-                email: "proc@gmail.com",
-                password: "test123",
-                name: "Temitope Fasoranti",
-                role: "PROC",
-                staffId: "SN32156"
-            },
-        ]
-
         if(formData.password !== "" && formData.email !== ""){
-            if(userLogin.some(user => user.email === formData.email && user.password === formData.password)){
+            // if(userLogin.some(user => user.email === formData.email && user.password === formData.password)){
                 
-                userLogin.some(user => {
-                    if(user.email === formData.email && user.password === formData.password){
+            //     userLogin.some(user => {
+            //         if(user.email === formData.email && user.password === formData.password){
                         
-                        let userData;
+            //             let userData;
     
-                        userData = {
-                            email: user.email,
-                            name: user.name,
-                            role: user.role,
-                            staffId: user.staffId
-                        }
+            //             userData = {
+            //                 email: user.email,
+            //                 name: user.name,
+            //                 role: user.role,
+            //                 staffId: user.staffId
+            //             }
 
                 
-                        localStorage.setItem('logindata', JSON.stringify(userData));
+            //             localStorage.setItem('logindata', JSON.stringify(userData));
                         
-                        dispatch(setLogin(userData))
+            //             dispatch(setLogin(userData))
 
-                        console.log("user exist")
+            //             console.log("user exist")
 
-                        navigate('/dashboard')
-                    }
+            //             navigate('/dashboard')
+            //         }
 
-                })
+            //     })
     
-            }else{
-                setInvalidLogin(true);
-            }
+            // }else{
+            //     setInvalidLogin(true);
+            // }
+
+            fetch(`http://localhost:8000/users?email=${formData.email}&password=${formData.password}`)
+            .then(data => data.json())
+            .then(res => {
+
+                if(res.length !== 0){
+
+                    let userData = res[0]
+            
+                    localStorage.setItem('logindata', JSON.stringify(userData));
+                    
+                    dispatch(setLogin(userData))
+
+                    console.log("user exist")
+
+                    navigate('/dashboard')
+
+                }else{
+                    setInvalidLogin(true);
+                } 
+
+            })
+            .catch(error => console.error(error))
 
         }
 

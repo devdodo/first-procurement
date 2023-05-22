@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AddButton from './AddButton'
 
-const RequestItem = () => {
+const RequestItem = ({id}) => {
+
+    const newData = () => {
+        fetch(`http://localhost:8000/request?id=${id}`)
+        .then(data => data.json())
+        .then(res => {
+
+            return res
+
+        })
+        .catch(error => console.error(error))
+    }
+
+    const val = newData()
+
+    console.log(val)
+    
 
   return (
     <div>
@@ -16,7 +32,11 @@ const RequestItem = () => {
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Item(s):</p>
                      </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
-                            <p className='mb-2'>* Laptop x2</p>
+                            {
+                                // requestData.items.map(data => {
+                                //     <p className='mb-2'>* {data.item} x{2}</p>
+                                // })
+                            }
                             <p className='mb-2'>* ATM cards x2,000</p>
                             <p className='mb-2'>* A4 Papers (Cartons) x5</p>
                             <p className='mb-2'>* Office Chairs x2</p>
@@ -41,7 +61,7 @@ const RequestItem = () => {
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Comments:</p>
                         </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
-                            <p className='mb-2'>Package confirmed by Head of Branch Services</p>
+                            <p className='mb-2'>{newData.comment}</p>
                         </div>
                     </div>
                     <div className="section-item flex">

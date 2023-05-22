@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import RequestItem from '../components/RequestItem'
 import RequestItemAdmin from '../components/RequestItemAdmin'
 import RequestItemProc from '../components/RequestItemProc'
+import { useLocation } from 'react-router-dom';
 
 const TrackRequestItem = () => {
   const currentPage = "Track Request Item"
@@ -12,13 +13,22 @@ const TrackRequestItem = () => {
 
   const role = JSON.parse(storedElements).role
 
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+
+  const value = searchParams.get('id');
+
+  console.log(value);
+
+  
     const requestItem = () => {
         if(role==="ADMIN"){
-            return <RequestItem />
+            return <RequestItem id={value} />
         }else if(role==="HBS"){
-            return <RequestItemAdmin />
+            return <RequestItemAdmin id={value} />
         }else if(role==="PROC"){
-            return <RequestItemProc />
+            return <RequestItemProc id={value} />
         }
     }
 
