@@ -1,7 +1,7 @@
 import React from 'react'
 import AddButton from './AddButton'
 
-const RequestItemAdmin = () => {
+const RequestItemAdmin = ({id}) => {
     const newData = () => {
         fetch(`http://localhost:8000/request?id=${id}`)
         .then(data => data.json())
