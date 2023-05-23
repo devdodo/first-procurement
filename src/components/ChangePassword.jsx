@@ -1,6 +1,6 @@
 import React from 'react';
-import AddButton from './AddButton';
 import { useState } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
 
 const ChangePassword = () => {
 	//Password
@@ -18,9 +18,29 @@ const ChangePassword = () => {
 	] = useState('');
 
 	//Change password function
-	const onClickChangePassword = (e) => {
+
+	const SendRequest = () => {
+		return (
+			<button>
+				<div className='p-4 bg-secondary border-rounded text-white w-48 mb-8 flex'>
+					<FaPlusCircle className='mt-1 mr-3' />
+					Send Request
+				</div>
+			</button>
+		);
+	};
+
+	const onSubmitPassword = (e) => {
 		e.preventDefault();
-		console.log('clicked');
+
+		//New password validation
+		const newPasswordPattern = /^[A-Za-z]+$/;
+		if (!newPasswordPattern.test(newPassword)) {
+			setNewPasswordError(
+				'Password pattern not valid',
+			);
+			return;
+		} else setNewPasswordError('');
 	};
 
 	return (
@@ -34,7 +54,10 @@ const ChangePassword = () => {
 				</p>
 			</div>
 			<div className='section-table border border-1 border-rounded p-4'>
-				<form action=''>
+				<form
+					action=''
+					onSubmit={onSubmitPassword}
+				>
 					<div className='form-group mb-4'>
 						<div className='form-item flex flex-col mr-4'>
 							<label
@@ -134,12 +157,7 @@ const ChangePassword = () => {
 					</div>
 
 					<div className='form-group'>
-						<AddButton
-							btnText={'Change Password'}
-							btnIcon={false}
-							btnColor={'bg-secondary'}
-							onClick={onClickChangePassword}
-						/>
+						<SendRequest />
 					</div>
 				</form>
 			</div>

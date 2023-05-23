@@ -128,6 +128,7 @@ const AddItems = () => {
 
 	const submitForm = (e) => {
 		e.preventDefault();
+		console.log('sent');
 
 		modalDisplay
 			? setModalDisplay(false)
