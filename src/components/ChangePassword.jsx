@@ -34,13 +34,23 @@ const ChangePassword = () => {
 		e.preventDefault();
 
 		//New password validation
-		const newPasswordPattern = /^[A-Za-z]+$/;
+		const newPasswordPattern =
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/;
 		if (!newPasswordPattern.test(newPassword)) {
 			setNewPasswordError(
 				'Password pattern not valid',
 			);
 			return;
 		} else setNewPasswordError('');
+
+		// Comfirm password validation
+
+		if (confirmPassword !== newPassword) {
+			setConfirmPasswordError(
+				'Passwords do not match',
+			);
+			return;
+		} else setConfirmPasswordError('');
 	};
 
 	return (
@@ -68,7 +78,7 @@ const ChangePassword = () => {
 								Password
 							</label>
 							<input
-								type='text'
+								type='password'
 								name='itemNumber'
 								id=''
 								className='input-width p-4 border border-rounded bg-white'
@@ -109,7 +119,7 @@ const ChangePassword = () => {
 								New Password
 							</label>
 							<input
-								type='text'
+								type='password'
 								name='itemNumber'
 								id=''
 								className='input-width p-4 border border-rounded bg-white'
@@ -136,7 +146,7 @@ const ChangePassword = () => {
 								Confirm Password
 							</label>
 							<input
-								type='text'
+								type='password'
 								name='itemNumber'
 								id=''
 								className='input-width p-4 border border-rounded bg-white'
