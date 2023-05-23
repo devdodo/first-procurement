@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react'
 import AddButton from './AddButton'
 
 const RequestItem = ({id}) => {
+    // const [request, setRequest] = useState([])
 
     const newData = () => {
         fetch(`http://localhost:8000/request?id=${id}`)
         .then(data => data.json())
         .then(res => {
 
-            return res
+            // setRequest(res)
+            localStorage.setItem('recentrequest', JSON.stringify(res));
 
         })
         .catch(error => console.error(error))
     }
 
-    const val = newData()
+    newData()
 
-    console.log(val)
+    const request = JSON.parse(localStorage.getItem('recentrequest'))[0]
     
 
   return (
@@ -33,15 +35,13 @@ const RequestItem = ({id}) => {
                      </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
                             {
-                                // requestData.items.map(data => {
-                                //     <p className='mb-2'>* {data.item} x{2}</p>
-                                // })
+                                request.items.map(data => {
+                                    <p className='mb-2'>* {data.item} x{data.quantity}</p>
+                                })
                             }
-                            <p className='mb-2'>* ATM cards x2,000</p>
-                            <p className='mb-2'>* A4 Papers (Cartons) x5</p>
-                            <p className='mb-2'>* Office Chairs x2</p>
-                            <p className='mb-2'>* Office Chairs x2</p>
-                            <p className='mb-2'>* Office Chairs x2</p>
+                            <p className='mb-2'>Laptop x2</p>
+                            <p className='mb-2'>A4 Paper x2</p>
+                            <p className='mb-2'>Printer x2</p>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ const RequestItem = ({id}) => {
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Approver:</p>
                         </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
-                            <p className='mb-2'>Atolagbe Emmanuel</p>
+                            <p className='mb-2'>Emmanuel Doneziba</p>
                         </div>
                     </div>
                     <div className="section-item flex">
@@ -61,7 +61,7 @@ const RequestItem = ({id}) => {
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Comments:</p>
                         </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
-                            <p className='mb-2'>{newData.comment}</p>
+                            <p className='mb-2'>{request.comment}</p>
                         </div>
                     </div>
                     <div className="section-item flex">
@@ -69,7 +69,7 @@ const RequestItem = ({id}) => {
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Status:</p>
                         </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
-                            <p className='mb-2'>Pending</p>
+                            <p className='mb-2'>{request.status}</p>
                         </div>
                     </div>
                     <div className="section-item flex">
@@ -77,7 +77,7 @@ const RequestItem = ({id}) => {
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Date:</p>
                         </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
-                            <p className='mb-2'>02-06-2023</p>
+                            <p className='mb-2'>{request.date}</p>
                         </div>
                     </div>
                     <div className="section-item flex">
@@ -85,10 +85,10 @@ const RequestItem = ({id}) => {
                             <p className="font-semibold" style={{color: '#5B5B5B'}}>Progress:</p>
                         </div>
                         <div className="item-detail" style={{color: '#5B5B5B'}}>
-                            <p className='mb-2'>* Laptop x2</p>
-                            <p className='mb-2'>* ATM cards x2,000</p>
-                            <p className='mb-2'>* A4 Papers (Cartons) x5</p>
-                            <p className='mb-2'>* Office Chairs x2</p>
+                            <p className='mb-2 text-green-500'>Request Sent</p>
+                            <p className='mb-2 text-gray-300'>HBS Approval</p>
+                            <p className='mb-2 text-gray-300'>Procurement Manager Approval</p>
+                            <p className='mb-2 text-gray-300'>Request Complete</p>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,21 @@ import React from 'react'
 import AddButton from './AddButton'
 
 const RequestItemAdmin = () => {
+    const newData = () => {
+        fetch(`http://localhost:8000/request?id=${id}`)
+        .then(data => data.json())
+        .then(res => {
+
+            // setRequest(res)
+            localStorage.setItem('recentrequest', JSON.stringify(res));
+
+        })
+        .catch(error => console.error(error))
+    }
+
+    newData()
+
+    const request = JSON.parse(localStorage.getItem('recentrequest'))[0]
 
   return (
     <div>

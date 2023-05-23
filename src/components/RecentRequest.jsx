@@ -9,23 +9,44 @@ const RecentRequest = () => {
 
 
     useEffect(() => {
-        
-        fetch(`http://localhost:8000/request?initiatedBy=${userData.staffId}`)
-        .then(data => data.json())
-        .then(res => {
 
-            setRequest(res)
+        if(userData.role === "ADMIN"){
 
-		    const userData = JSON.parse(localStorage.getItem('logindata'))
-
-            fetch(`http://localhost:8000/users?solId=${userData.solId}&role=HBS`)
+            fetch(`http://localhost:8000/request?initiatedBy=${userData.staffId}`)
             .then(data => data.json())
             .then(res => {
-                setApproverName(res[0].name)
+    
+                setRequest(res)
+    
+                const userData = JSON.parse(localStorage.getItem('logindata'))
+    
+                fetch(`http://localhost:8000/users?solId=${userData.solId}&role=HBS`)
+                .then(data => data.json())
+                .then(res => {
+                    setApproverName(res[0].name)
+                })
+                .catch(error => console.error(error)) 
             })
-            .catch(error => console.error(error)) 
-        })
-        .catch(error => console.error(error))
+            .catch(error => console.error(error))
+        }else{
+
+            fetch(`http://localhost:8000/request?solId=${userData.solId}`)
+            .then(data => data.json())
+            .then(res => {
+    
+                setRequest(res)
+    
+                const userData = JSON.parse(localStorage.getItem('logindata'))
+    
+                fetch(`http://localhost:8000/users?role=PROC`)
+                .then(data => data.json())
+                .then(res => {
+                    setApproverName(res[0].name)
+                })
+                .catch(error => console.error(error)) 
+            })
+            .catch(error => console.error(error))
+        }
 
     }, [])
 
